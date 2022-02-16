@@ -1,0 +1,15 @@
+Penambahan PTP dimulai dari Prospect
+Saat pengajuan survey , Sales menambahkan Site PTP
+data yang disimpan antara lain adalah alamat cabang perusahaan
+
+TS mengisi laporan PTP
+
+yang dikerjakan hari ini:
+PTP
+terdampak:
+modules/survey_requests/controllers/survey_requests.php
+models/pclient.php
+views/Sales/surveys/add20210922.php
+views/Sales/surveys/add/addptp.php
+models/psurvey_site
+models/pclient_site

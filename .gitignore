@@ -1,0 +1,11 @@
+application/config
+application/third_party
+application/datamapper
+application/cache
+application/core
+application/hooks
+application/logs
+application/images
+img/
+images/
+
