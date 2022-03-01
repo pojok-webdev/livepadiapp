@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php $this->load->view('adm/head');?>
+<link rel="stylesheet" href="/css/aquarius/padiInstallTable.css" />
 <script type="text/javascript" src="/js/aquarius/TS/installs/installs.js"></script>
 <body>
     <div class="header">
