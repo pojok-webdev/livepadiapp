@@ -10,5 +10,7 @@
     tr{
         border:1px solid black;
     }
-    
+    .btn-group{
+        text-align: right;
+    }
 }
