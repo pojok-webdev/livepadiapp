@@ -457,17 +457,6 @@ function chooseRole(){
 				redirect("/schedules/show");
 			}
 		break;
-		case "Accounting":
-			$session_data = array(
-				'role' => "Accounting"
-			);
-			$this->session->set_userdata($session_data);
-			if($this->session->userdata("pending_url")){
-				redirect($this->session->userdata("pending_url"));
-			}else{
-				redirect("/accounting");
-			}
-		break;
 		}
 	}
 }

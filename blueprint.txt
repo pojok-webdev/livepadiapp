@@ -1,0 +1,35 @@
+Deskripsi
+PadiApp merupakan aplikasi database untuk mencatat sistem informasi pelanggan di lingkungan Padi Internet. Data yang dicatat antara lain proses Lead, Prospek, Pengajuan Survey, Pengajuan Instalasi, Ticket hingga Troubleshoot
+Fungsi
+Menyimpan informasi Pelanggan
+
+Menyajikan Laporan :
+Pelanggan
+Ticket
+
+
+
+Fitur
+Berbasis browser
+Aplikasi ini berbasis browser sehingga dapat diakses lintas platform 
+Mobile views (responsive)
+PadiApp berbasis web, dan memiliki fitur responsive yaitu dapat menyesuaikan dengan dimensi browser perangkat yang menggunakan
+Upload Gambar
+Beberapa laporan membutuhkan fitur upload gambar aktivitas di lapangan. Diantaranya adalah Survey dn Instalasi.
+Generate Laporan
+Laporan digenerata dalam format PDF
+Notifikasi
+Notifikasi diberikan dalam bentuk email maupun telegram 
+
+Database
+Database yang dipergunakan untuk PadiApp adalah MySQL 5.5
+
+Penyimpanan
+Data PadiApp di simpan di server lokal yaitu Server Ubuntu 14.04 dengan IP Address 192.168.0.117
+
+Interaksi dengan Aplikasi Lain
+PadiApp berinteraksi dengan :
+aplikasi email padinet. 
+telegram
+workorder
+

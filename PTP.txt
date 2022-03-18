@@ -13,3 +13,6 @@ views/Sales/surveys/add20210922.php
 views/Sales/surveys/add/addptp.php
 models/psurvey_site
 models/pclient_site
+
+https://www.openstreetmap.org/user/new
+G4tt5tTxSMXaPdz

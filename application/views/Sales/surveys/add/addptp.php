@@ -2,6 +2,11 @@
     <div class="block">
         <span>Alamat:</span>
         <p><input type="text" id="inpPTPAddress"></p>
+        <span>Jarak:</span>
+        <p><input type="text" id="inpPTPAddress"></p>
+        <span>LOS/nLOS:</span>
+        <p><input type="text" id="inpPTPAddress"></p>
+
     </div>
 </div>
 <script>
