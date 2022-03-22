@@ -20,6 +20,7 @@
 								<option value="datacenter">Datacenter</option>
 								<option value="hardware">Hardware</option>
 								<option value="jasa">Jasa</option>
+								<option value="SOHO">SOHO</option>
 								<option value="others">Others</option>
 							</select>
 						</div>
@@ -505,6 +506,9 @@
 			sjasa+= '<option value="troubleshooting">Troubleshooting</option>';
 			sjasa+= '<option value="maintenance dan manage service">Maintenance dan Manage Service</option>';
 
+			ssoho = '<option value="1">1:2</option>';
+			ssoho+= '<option value="2">1:4</option>';
+
 			sdomestic = '<option id="iix" value="iix">IIX</option>';
 			sdomestic+= '<option id="localloop" value="localloop">Local Loop</option>';
 			sinternational = '<option id="padimix" value="padimix">Padi Mix</option>';
@@ -556,6 +560,11 @@
 						$("#serviceSubCategory").show();
 						$("#serviceSubCategory").append(sjasa);
 					break;
+					case 'SOHO':
+						$("#serviceSubCategory").empty();
+						$("#serviceSubCategory").show();
+						$("#serviceSubCategory").append(ssoho);
+						break;
 					case 'others':
 						$("#serviceSubCategory").hide();
 					break;
