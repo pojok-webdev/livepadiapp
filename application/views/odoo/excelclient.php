@@ -1,7 +1,7 @@
 <html>
     <head>
     <?php
-        if(1==2){
+        if(1==1){
             header("Content-Type: application/vnd.ms-excel; charset=utf-8");
             header("Content-Disposition: attachment;filename=pelanggan.xls");
             header("Cache-Control: private",false);
@@ -36,15 +36,15 @@
             <?php $c++;?>
                 <tr>
                     <td><?php echo $c;?></td>
-                    <td><?php echo strtoupper($obj->name);?></td>
+                    <td><?php echo '<strong>'.strtoupper($obj->name).'</strong>';?></td>
                     <td>
-                        <?php echo '<strong>'.$obj->address.'</strong>';?>
+                        <?php echo ucfirst($obj->address);?>
                     </td>
                     <td>
-                        <?php echo '<strong>'.$obj->ou.'</strong>';?>
+                        <?php echo $obj->ou;?>
                     </td>
                     <td>
-                        <?php echo '<strong>'.$obj->brn.'</strong>';?>
+                        <?php echo $obj->brn;?>
                     </td>
                     <td></td><td></td><td></td><td></td>
                 </tr>
