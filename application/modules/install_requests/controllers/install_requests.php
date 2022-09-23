@@ -440,12 +440,12 @@ class Install_requests extends CI_Controller {
 		$this->data['client_vases'] = $getvases['records'];
 		$this->data['totalvas'] = $getvases['total'];
 		$this->data['categories'] = $this->pclient->getcategories();$this->data['internets']=$pinternets;$this->data['vases']=$pvases;$this->data['devices']=$pdevices;$this->data['philoins']=$pphiloins;
-		$this->load->view('Sales/installs/preview20210923',$this->data);
+		$this->load->view('Sales/installs/preview20220429',$this->data);
 	}
 	function addservice(){
 		$params = $this->input->post();
-		$this->pservice->saveinstallservice($params['client_id'],$params['servicetype'],$params['product_id']);
-		echo json_encode($params);
+		echo json_encode($this->pservice->saveinstallservice($params['client_id'],$params['servicetype'],$params['product_id'],$params['ownership']));
+		//echo json_encode($params);
 	}
 	function getservicesbytype(){
 		$params = $this->input->post();
@@ -565,7 +565,7 @@ class Install_requests extends CI_Controller {
 		$res = $this->db->query($query);
 		$sr = $res->result();
 
-		$qii = "select a.id,a.img,a.title,a.description from install_images a where a.install_site_id=".$installsiteid. " ";
+		$qii = "select a.id,a.img,a.title,a.description,imgondisk,path from install_images a where a.install_site_id=".$installsiteid. " ";
 		$qii.= "order by roworder asc ";
 		$res = $this->db->query($qii);
 		$ii = $res->result();
@@ -732,5 +732,11 @@ class Install_requests extends CI_Controller {
 	function updatematerial(){
 		$params = $this->input->post();
 		echo $this->pinstall_request->updatematerial($params);
+	}
+	function saveinstalldeviceinfo(){
+		echo json_encode($this->pinstall_request->saveinstalldeviceinfo($this->input->post()));
+	}
+	function updatetipedevice(){
+		echo json_encode($this->pinstall_request->updatetipedevice($this->input->post()));
 	}
 }

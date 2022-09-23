@@ -15,7 +15,8 @@ $(document).ready(function(){
                             data:{
                                 client_id:client_id,
                                 servicetype:2,
-                                product_id:$('#selectedvas').val()
+                                product_id:$('#selectedvas').val(),
+                                ownership:'0'
                             },
                             type:'post',
                             dataType:'json'

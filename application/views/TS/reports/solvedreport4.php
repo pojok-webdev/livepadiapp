@@ -69,7 +69,7 @@
     </div>
     <?php $this->load->view('shared/confirmmodal');?>
     <script src="/asset/padi.common.js"></script>
-    <script src="/asset/aqua/js/paginateds/index.js"></script>
+    <script src="/asset/aqua/js/paginateds/index.js?v=1"></script>
     <script src="/asset/aqua/js/paginateds/search.js"></script>
 </body>
 </html>

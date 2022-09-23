@@ -1,39 +1,41 @@
 (function($){
+	adaptRouter = obj=>{
+		switch(obj.routerval){
+				case "1":
+				$("#router_pelanggan").hide();
+				$("#router_padinet").show();
+				$("#tipe_router_pelanggan").removeClass("inp_router");
+				$("#tipe_router").addClass("inp_router");
+			break;
+			case "2":
+				$("#router_pelanggan").hide();
+				$("#router_padinet").show();
+				$("#tipe_router_pelanggan").removeClass("inp_router");
+				$("#tipe_router").addClass("inp_router");
+			break;
+			case "3":
+				$("#router_pelanggan").show();
+				$("#router_padinet").hide();
+				$("#tipe_router_pelanggan").addClass("inp_router");
+				$("#tipe_router").removeClass("inp_router");
+			break;
+			case "4":
+				$("#router_pelanggan").show();
+				$("#router_padinet").hide();
+				$("#tipe_router_pelanggan").addClass("inp_router");
+				$("#tipe_router").removeClass("inp_router");
+			break;
+		}
+	}
 	$(".btn_addrouter").click(function(){
 		$(".updaterouter").hide();
 		$(".saverouter").show();
 		$("#dAddRouter").modal("show");
 	});
-	switch($("#pemilik_router").val()){
-		case "0"://Pelanggan
-			$("#router_pelanggan").show();
-			$("#tipe_router_pelanggan").addClass("inp_router");
-			$("#router_padinet").hide();
-			$("#tipe_router").removeClass("inp_router");
-		break;
-		case "1"://Padinet
-			$("#router_pelanggan").hide();
-			$("#tipe_router_pelanggan").removeClass("inp_router");
-			$("#router_padinet").show();
-			$("#tipe_router").addClass("inp_router");
-		break;
-	}	
-	$("#pemilik_router").change(function(){
-		switch($(this).val()){
-			case "0"://Pelanggan
-				$("#router_pelanggan").show();
-				$("#tipe_router_pelanggan").addClass("inp_router");
-				$("#router_padinet").hide();
-				$("#tipe_router").removeClass("inp_router");
-			break;
-			case "1"://Padinet
-				$("#router_pelanggan").hide();
-				$("#tipe_router_pelanggan").removeClass("inp_router");
-				$("#router_padinet").show();
-				$("#tipe_router").addClass("inp_router");
-			break;
-		}
-	});
+	adaptRouter({routerval:$("#milikpadinet").val()})
+	$("#milikpadinet").change(function(){
+		adaptRouter({routerval:$(this).val()})
+	})
 	$("#router").on("click",".edit_router",function(){
 		var selected = $(this).stairUp({level:4}),
 			id = selected.attr('myid');
@@ -42,23 +44,11 @@
 		$(".saverouter").hide();
 		$(".updaterouter").show();
 		$(".updaterouter").attr("id",id);
-		$.getJSON(thisdomain+'install_routers/getjsonrouter/'+id,function(data){
-			$("#pemilik_router").val(data['milikpadinet']);
-			console.log(data['milikpadinet']);
-			switch($("#pemilik_router").val()){
-				case "0"://Pelanggan
-					$("#router_pelanggan").show();
-					$("#router_padinet").hide();
-					$("#tipe_router_pelanggan").addClass("inp_router");
-					$("#tipe_router").removeClass("inp_router");
-				break;
-				case "1"://Padinet
-					$("#router_pelanggan").hide();
-					$("#router_padinet").show();
-					$("#tipe_router_pelanggan").removeClass("inp_router");
-					$("#tipe_router").addClass("inp_router");
-				break;
-			}
+		$.getJSON('/install_routers/getjsonrouter/'+id,function(data){
+			//$("#pemilik_router").val(data['milikpadinet']);
+			$("#milikpadinet").val(data['milikpadinet']);
+			console.log("data retrieved",data);
+			adaptRouter({routerval:$('#milikpadinet').val()})
 			$.each($("#tipe_router option"),function(x,y){
 				if(data['tipe']==$(this).text()){
 					$(this).attr("selected","selected");
@@ -89,12 +79,13 @@
 	$(".saverouter").click(function(){
 		$(".inp_router").makekeyvalparam();
 		$.ajax({
-			url:thisdomain+"install_routers/save",
+			url:"/install_routers/save",
 			data:JSON.parse('{'+$(".inp_router").attr("keyval")+'}'),
 			type:"post",
 		}).done(function(data){
 			$("#router").appendrouter(data);
 			update_rowcount($("#total_router"),$("#router tbody tr"));
+			console.log("Inserted Router",data)
 		}).fail(function(){
 			console.log("Tidak dapat menyimpan Router, silakan hubungi Developer");
 		});
@@ -102,7 +93,8 @@
 	$(".updaterouter").click(function(){
 		$(".inp_router").makekeyvalparam();
 		var myid = $("#router tbody tr.selected").attr("myid");
-		$.post(thisdomain+'install_routers/update/',
+		console.log("router id",myid)
+		$.post('/install_routers/update/',
 		{
 			id:myid,tipe:$("#tipe_router :selected").text(),
 			macboard:$("#macboard_router").val(),
@@ -113,25 +105,55 @@
 			barcode:$("#barcode_router").val(),
 			password:$("#password_router").val(),
 			location:$("#location_router").val(),
-			milikpadinet:$('#pemilik_router').val()
+			//milikpadinet:$('#pemilik_router').val()
+			milikpadinet:$('#milikpadinet').val()
 			}).done(function(data){
 		}).fail(function(){
 			alert("Tidak dapat mengupdate router, hubungi Developer");
-		}).done(function(){
+		}).done(function(res){
+			console.log('update result',res)
 			var tiperouter;
-			if($("#pemilik_router").val()==="0"){
+			/*if($("#pemilik_router").val()==="0"){
 				tiperouter = $("#tipe_router_pelanggan").val();
 			}else{
 				tiperouter = $("#tipe_router :selected").text();
-			}
+			}*/
+			switch($("#milikpadinet").val()){
+				case "1":
+					tiperouter = $("#tipe_router :selected").text();
+					break
+				case "2":
+					tiperouter = $("#tipe_router :selected").text();
+					break
+				case "3":
+					tiperouter = $("#tipe_router_pelanggan").val();
+					break
+				case "4":
+					tiperouter = $("#tipe_router_pelanggan").val();
+					break
+				}
 			$("#router tbody tr.selected").find("router_type").html(tiperouter);
 			$("#router tbody tr.selected").find("info").html("tipe_router_pelanggan");
 		});
 	});
 }(jQuery))
 $.fn.appendrouter = function(data){
-	var tr='<tr myid='+data+'>',
-	tipe = ($("#pemilik_router").val()=='1')?$('#tipe_router :selected').text():$("#tipe_router_pelanggan").val();
+	var tr='<tr myid='+data+'>'
+//	tipe = ($("#pemilik_router").val()=='1')?$('#tipe_router :selected').text():$("#tipe_router_pelanggan").val();
+	switch($("#milikpadinet").val()){
+		case "1":
+			tipe=$('#tipe_router :selected').text()
+			break;
+		case "2":
+			tipe=$('#tipe_router :selected').text()
+			break;
+		case "3":
+			tipe=$("#tipe_router_pelanggan").val()
+			break;
+		case "4":
+			tipe=$("#tipe_router_pelanggan").val()
+			break;
+		}//?$('#tipe_router :selected').text():$("#tipe_router_pelanggan").val();
 	tr+='<td>'+tipe+'</td>';
 	tr+='<td class="info">';
 	tr+='<a>'+$("#macboard_router").val()+'</a> ';

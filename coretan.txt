@@ -1,0 +1,43 @@
+select a.id,a.install_request_id,case when c.alias is null then c.name else concat(c.name,' (',c.alias,')')  end name,
+a.address,a.city,d.username,f.install_date,f.fix_install_date execdate,
+a.pic_name,a.pic_phone_area,group_concat(g.name) branch,a.status 
+from install_sites a 
+left outer join client_sites b on b.id=a.client_site_id 
+left outer join clients c on c.id=b.client_id 
+left outer join users d on d.id=c.user_id
+left outer join install_requests f on f.id=a.install_request_id
+left outer join branches g on g.id=c.branch_id
+where d.id in($userarr) and  c.branch_id in $brnc
+group by a.id,a.install_request_id, c.alias,c.name,
+a.address,a.city,d.username,f.install_date,f.fix_install_date ,
+a.pic_name,a.pic_phone_area,	a.status 
+
+
+
+select a.id,a.install_request_id,case when c.alias is null then c.name else concat(c.name,' (',c.alias,')')  end name,
+a.address,a.city,d.username,f.install_date,f.fix_install_date execdate,
+a.pic_name,a.pic_phone_area,group_concat(g.name) branch,a.status 
+from install_sites a 
+left outer join client_sites b on b.id=a.client_site_id 
+left outer join clients c on c.id=b.client_id 
+left outer join users d on d.id=c.user_id
+left outer join install_requests f on f.id=a.install_request_id
+left outer join branches g on g.id=c.branch_id
+where c.name like "%dny%" 
+group by a.id,a.install_request_id, c.alias,c.name,
+a.address,a.city,d.username,f.install_date,f.fix_install_date ,
+a.pic_name,a.pic_phone_area,	a.status 
+
+
+select c.id,case when c.alias is null then c.name else concat(c.name,' (',c.alias,')')  end name,
+a.address,a.city,d.username,a.status 
+from install_sites a 
+left outer join client_sites b on b.id=a.client_site_id 
+left outer join clients c on c.id=b.client_id 
+left outer join users d on d.id=c.user_id
+left outer join install_requests f on f.id=a.install_request_id
+left outer join branches g on g.id=c.branch_id
+where c.name like "%dny%" 
+group by a.id,a.install_request_id, c.alias,c.name,
+a.address,a.city,d.username,f.install_date,f.fix_install_date ,
+a.pic_name,a.pic_phone_area,	a.status 

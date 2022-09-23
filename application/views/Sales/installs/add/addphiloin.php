@@ -15,7 +15,8 @@ $(document).ready(function(){
                             data:{
                                 client_id:client_id,
                                 servicetype:4,
-                                product_id:$('#selectedphiloin').val()
+                                product_id:$('#selectedphiloin').val(),
+                                ownership:'0'
                             },
                             type:'post',
                             dataType:'json'

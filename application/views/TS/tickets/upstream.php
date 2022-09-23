@@ -42,8 +42,11 @@
 							</div>
 							<div class="row-form clearfix">
 								<div class="span4">Telp Pelapor</div>
-								<div class="span8">
+								<div class="span7">
 									<input type="text" id="ureporterphone">
+								</div>
+								<div class="span1">
+									<i class="icon-info-sign" title="<?php echo $ptooltip;?>"></i>
 								</div>
 							</div>
 							<div class="row-form clearfix" id="dudescription">

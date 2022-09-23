@@ -15,7 +15,7 @@
 		});
 	});	
 	$("#savewifi").click(function(){
-		$.post(thisdomain+'adm/wifiadd',{
+		$.post('/adm/wifiadd',{
 				install_site_id:$("#workplace").attr("install_site_id"),
 				tipe:$("#tipe_apwifi :selected").text(),
 				macboard:$("#macboard_apwifi").val(),
@@ -27,7 +27,8 @@
 				location:$("#location_apwifi").val(),
 				owner:$("#owner_apwifi").val(),
 				user_name:$("#createuser").val(),
-				createuser:$("#createuser").val()
+				createuser:$("#createuser").val(),
+				ownership:$('#ownership_apwifi').val()
 			}).done(function(data){
 			$("#ap_wifi").appendwifi(data);
 			}).fail(function(){
@@ -40,7 +41,7 @@
 		var selected = $(this).stairUp({level:4});
 		selected.addClass('selected');
 		$(".updatewifi").attr("id",selected.attr('thisid'));
-		$.getJSON(thisdomain+'install_ap_wifis/getjsonapwifi/'+selected.attr('thisid'),function(data){
+		/*$.getJSON('/install_ap_wifis/getjsonapwifi/'+selected.attr('thisid'),function(data){
 			$("#tipe_apwifi").val(data['tipe']);
 			$("#macboard_apwifi").val(data['macboard']);
 			$("#ip_address_apwifi").val(data['ip_address']);
@@ -50,12 +51,36 @@
 			$("#user_apwifi").val(data['user']);
 			$("#password_apwifi").val(data['password']);
 			$("#location_apwifi").val(data['location']);
-		});
+		});*/
+		$.ajax({
+			url:'/install_ap_wifis/getjson/'+selected.attr('thisid'),
+			dataType:'json'
+		})
+		.done(data=>{
+			d = data.res[0]
+			console.log('Data retrieved',d)
+			$("#tipe_apwifi").val(d.tipe);
+			$("#macboard_apwifi").val(d.macboard);
+			$("#ip_address_apwifi").val(d.ip_address);
+			$("#essid_apwifi").val(d.essid);
+			$("#security_key_apwifi").val(d.security_key);
+			$("#owner_apwifi").val(d.owner);
+			$("#user_apwifi").val(d.user);
+			$("#password_apwifi").val(d.password);
+			$("#location_apwifi").val(d.location);
+			//$("#ownership_apwifi").val(d.ownership)
+			$("#ownership_apwifi").setCombo({selected:d.ownership})
+		})
+		.fail(err=>{
+			console.log("Errror getjson",err)
+		})
 		$("#dAddAPWifi").modal();
 	});
 	$(".updatewifi").click(function(){
 		thisid = $(this).attr('id');
-		$.post(thisdomain+'install_ap_wifis/update',{id:thisid,install_site_id:$("#workplace").attr("install_site_id"),tipe:$("#tipe_apwifi :selected").text(),macboard:$("#macboard_apwifi").val(),ip_address:$("#ip_address_apwifi").val(),essid:$("#essid_apwifi").val(),security_key:$("#security_key_apwifi").val(),user:$("#user_apwifi").val(),password:$("#password_apwifi").val(),location:$("#location_apwifi").val(),owner:$("#owner_apwifi").val(),user_name:$("#workplace").attr("user_name")}).done(function(data){
+		$.post('/install_ap_wifis/update',{id:thisid,install_site_id:$("#workplace").attr("install_site_id"),tipe:$("#tipe_apwifi :selected").text(),macboard:$("#macboard_apwifi").val(),ip_address:$("#ip_address_apwifi").val(),essid:$("#essid_apwifi").val(),security_key:$("#security_key_apwifi").val(),user:$("#user_apwifi").val(),password:$("#password_apwifi").val(),location:$("#location_apwifi").val(),owner:$("#owner_apwifi").val(),user_name:$("#workplace").attr("user_name"),ownership:$('#ownership_apwifi').val()})
+		.done(function(data){
+			console.log("Update data",data)
 			$("#ap_wifi tbody tr.selected").find('.apwifi_tipe').html('<a>'+$("#tipe_apwifi :selected").text()+'</a><span>'+$("#ip_address_apwifi").val()+'</span><span>'+$("#essid_apwifi").val()+'</span>');
 			$("#ap_wifi tbody tr.selected").find('.info').html($("#macboard_apwifi").val());
 			$("#ap_wifi tbody tr.selected").find('.apwifi_location').html($("#location_apwifi").val());

@@ -68,7 +68,14 @@
 		<tr><td>6. </td><td colspan=2><b>Berita Acara</b></td></tr>
 		<?php foreach($bas as $ii){?>
 			<tr><td></td><td colspan=2><b><?php echo $ii->name?></b></td></tr>
-			<tr><td></td><td colspan=2><img src="<?php echo $ii->img;?>" width="600" height="400" alt="image"></td></tr>
+			<tr><td></td><td colspan=2>		
+				<?php if($ii->imgondisk==="1"){?>
+					<img src="/images/installs/<?php echo $ii->path;?>"  width="600" height="400" alt="A"/>
+				<?php }else{?>
+					<img src="<?php echo $ii->img;?>"  width="600" height="400" alt="B" />
+				<?php }?>
+
+			</td></tr>
 			<tr><td></td><td colspan=2><?php echo $ii->description?></td></tr>
 			<tr><td></td><td colspan=2>&nbsp;</td></tr>
 			<tr><td></td><td colspan=2>&nbsp;</td></tr> 
@@ -76,7 +83,13 @@
 		<tr><td>7. </td><td colspan=2><b>Dokumentasi</b></td></tr>
 		<?php foreach($install_images as $ii){?>
 			<tr><td></td><td colspan=2><b><?php echo $ii->title?></b></td></tr>
-			<tr><td></td><td colspan=2><img src="<?php echo $ii->img;?>" width="600" height="400" alt="image"></td></tr>
+			<tr><td></td><td colspan=2>
+			<?php if($ii->imgondisk==="1"){?>
+					<img src="<?php echo base_url()?>/images/installs/<?php echo $ii->path;?>"  width="600" height="400" />
+				<?php }else{?>
+					<img src="<?php echo $ii->img;?>"  width="600" height="400" alt="Gambar tidak ketemu" />
+				<?php }?>
+			</td></tr>
 			<tr><td></td><td colspan=2><?php echo $ii->description?></td></tr>
 			<tr><td></td><td colspan=2>&nbsp;</td></tr>
 			<tr><td></td><td colspan=2>&nbsp;</td></tr> 

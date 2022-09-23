@@ -68,7 +68,12 @@ Class Pservice extends CI_Model{
         );
     }
     function getinstallservicesbytype($client_id,$type){
-        $sql = 'select b.id,b.name from install_client_services a ';
+        $sql = 'select b.id,b.name,a.ownership,a.service_id,';
+        $sql.= ' case a.ownership when "1" then "Sewa di PadiNET"';
+        $sql.= ' when "2" then "Pinjam di PadiNET" ';
+        $sql.= ' when "2" then "Beli di PadiNET" ';
+        $sql.= ' when "2" then "Beli di pihak lain" end owner ';
+        $sql.= 'from install_client_services a ';
         switch($type){
             case '1':
             $sql.= 'left outer join pricelists2.products b on b.id=a.service_id ';
@@ -129,13 +134,14 @@ Class Pservice extends CI_Model{
         $que = $ci->db->query($sql);
         return $sql;
     }
-    function saveinstallservice($client_id,$servicetype,$service_id){
+    function saveinstallservice($client_id,$servicetype,$service_id,$ownership){
         $sql = 'insert into install_client_services ';
-        $sql.= '(client_id,servicetype,service_id)';
+        $sql.= '(client_id,servicetype,service_id,ownership)';
         $sql.= 'values ';
-        $sql.= '('.$client_id.','.$servicetype.','.$service_id.')';
+        $sql.= '('.$client_id.','.$servicetype.','.$service_id.',"'.$ownership.'")';
         $ci = & get_instance();
         $que = $ci->db->query($sql);
+        return $sql;
     }
     function savesuspectservice($client_id,$servicetype,$service_id){
         $sql = 'insert into suspect_client_services ';

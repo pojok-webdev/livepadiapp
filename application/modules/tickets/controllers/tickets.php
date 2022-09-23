@@ -247,6 +247,12 @@ class Tickets extends CI_Controller{
 		$data['minutes'] = $this->common->getminutes();
 		$data['clients'] = getclientsites();
 		$this->load->helper('ticket');
+		$data['ptooltip'] = 'Contoh text input kolom Telpon::
+		1. WA (0899-1405-888) 
+		2. WAG (nama_WAG)
+		3. Telpon (031-5616330) 
+		4. Email (support@padi.net.id) 
+		5. Internal PadiNET (via Sales/via EOS/via TS/via Pak Sodik)';
 		$data['ticketcauses'] = get_ticketcause_combo_data('Pilihlah');
 		$data['ticketcausecategories'] = get_ticketcausecategory_combodata('Pilihlah');
 		//$data['ticketcauses'] = $this->ticketcause->get_combo_data('Pilihlah');

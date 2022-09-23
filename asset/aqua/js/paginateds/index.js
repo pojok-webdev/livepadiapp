@@ -25,6 +25,8 @@
                 str+= '</td>';
                 str+= '<td>';
                 str+= b.clientname;
+                str+= '<br />';
+                str+= '<strong>'+b.brn+'</strong>';
                 str+= '</td>';
                 str+= '<td class="requesttype">';
                 str+= b.requesttype + '<span class="childrenamount"></span>';

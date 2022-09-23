@@ -3,6 +3,15 @@
         <span>Nama:</span>
         <p><?php echo form_dropdown('devices',$devices,0,'id=selecteddevice');?></p>
     </div>
+    <div class="block">
+        <span>Status Perangkat:</span>
+        <select id="statusperangkat">
+            <option value="1">Sewa (milik PadiNET)</option>
+            <option value="2">Dipinjamkan</option>
+            <option value="3">Milik Pelanggan (Beli ke PadiNET)</option>
+            <option value="4">Milik Pelanggan (Beli sendiri)</option>
+        </select>
+    </div>
 </div>
 <script>
 $(document).ready(function(){
@@ -15,7 +24,8 @@ $(document).ready(function(){
                             data:{
                                 client_id:client_id,
                                 servicetype:3,
-                                product_id:$('#selecteddevice').val()
+                                product_id:$('#selecteddevice').val(),
+                                ownership:$('#statusperangkat').val()
                             },
                             type:'post',
                             dataType:'json'
@@ -71,8 +81,9 @@ $(document).ready(function(){
             console.log('res',res)
             res.forEach(row=>{
                 str = '<tr>'
-                str+= '<td class="id">'+row.id+'</td>'
+                str+= '<td class="id">'+row.service_id+'</td>'
                 str+= '<td>'+row.name+'</td>'
+                str+= '<td>'+row.owner+'</td>'
                 str+= '<td><a class="removeservice icon-trash"></a></td>'
                 str+= '</tr>'
                 $('#tDevice tbody').append(str)

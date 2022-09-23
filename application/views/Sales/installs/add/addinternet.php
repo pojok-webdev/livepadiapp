@@ -16,7 +16,8 @@
                             data:{
                                 client_id:client_id,
                                 servicetype:1,
-                                product_id:$('#selectedinternet').val()
+                                product_id:$('#selectedinternet').val(),
+                                ownership:'0'
                             },
                             type:'post',
                             dataType:'json'

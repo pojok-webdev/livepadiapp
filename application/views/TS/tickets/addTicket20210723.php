@@ -92,7 +92,12 @@
 							</div>
 							<div class="row-form clearfix">
 								<div class="span4">Telp</div>
-								<div class="span8"><input type="text" id="reporterphone" name="reporterphone" class="inp_ticket2" /></div>
+								<div class="span7">
+									<input type="text" id="reporterphone" name="reporterphone" class="inp_ticket2" />
+								</div>
+								<div class="span1">
+									<i class="icon-info-sign" title="<?php echo $ptooltip;?>"></i>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -385,8 +390,10 @@ $('#btn_saveticket').prop('disabled',true)
 
 			//			sendmail(recipient,subject,bodycontent,copycarbon);
 						updateRecordRow();
-$('#btn_saveticket').prop('disabled',false)
-
+						$('#btn_saveticket').prop('disabled',false)
+						console.log('newticket',newticket)
+						sendDiscord(newticket,'puji')
+						sendDiscord(newticket,'padi')
 						$('#dAddTicket').modal('hide');
 					});
 					console.log('query',data);

@@ -51,7 +51,7 @@
 			console.log("new date:"+new Date());
 			console.log("new date="+new Date(y, m, 20));
 			$.ajax({
-				url:thisdomain+"schedules/getJson",
+				url:"/schedules/getJson",
 			}).done(function(data){
 				console.log(data);
 				$('#calendar').fullCalendar({

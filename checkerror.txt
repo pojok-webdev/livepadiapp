@@ -1,0 +1,21 @@
+select distinct 'yellow' as color,d.username,a.id,c.name, case  when (a.execution_date is null or date(a.execution_date)='0000-00-00') then concat(date_format(a.survey_date,'%Y-%m-%d'),'T',date_format(a.survey_date,'%H:%m:%s')) else concat(date_format(a.execution_date,'%Y-%m-%d'),'T',date_format(a.execution_date,'%H:%m:%s')) end execution_date , case  when (a.execution_date is null or date(a.execution_date)='0000-00-00') then date_format(a.survey_date,'%Y-%m-%d %H:%i:%s') else date_format(a.execution_date,'%Y-%m-%d %H:%i:%s') end execution_date_154 ,'2015-04-04' x from survey_sites a left outer join survey_requests b on b.id=a.survey_request_id left outer join clients c on c.id=b.client_id left outer join users d on d.id=c.sale_id left outer join client_sites e on e.client_id=c.id  where a.active='1' and b.active='1' and date_format(a.survey_date,'%Y-%m-%d')>'2020-01-01'  and c.branch_id in (".$branches.")"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select distinct 'yellow' as color,d.username,a.id,c.id cid,c.name, c.branch_id from survey_sites a left outer join survey_requests b on b.id=a.survey_request_id left outer join clients c on c.id=b.client_id left outer join users d on d.id=c.sale_id left outer join client_sites e on e.client_id=c.id  where a.active='1' and b.active='1' and date_format(a.survey_date,'%Y-%m-%d')>'2020-01-01' and a.id=2291;
+
+
+select count(fb_id)cnt,fb_id,name,group_concat(srv)r from (select a.fb_id,a.name srv,b.name from fbservices a left outer join fbs b on a.fb_id=b.nofb where b.status="1" and b.expirystatus="0")A group by fb_id into outfile "brengos.csv" fields terminated by ",";

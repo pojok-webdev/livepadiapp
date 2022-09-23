@@ -133,7 +133,7 @@ class Pinstall_request extends CI_Model{
         return $sql;
     }
     function getrouters($install_site_id){
-        $sql = "select * from install_routers a ";
+        $sql = "select a.* from install_routers a ";
         $sql.= "left outer join install_sites b on b.id=a.install_site_id ";
         $sql.= "where b.id = " . $install_site_id . "";
         $ci = & get_instance();
@@ -141,7 +141,7 @@ class Pinstall_request extends CI_Model{
         return array('res'=>$que->result(),'count'=>$que->num_rows());
     }
     function getinstallapwifis($install_site_id){
-        $sql = "select * from install_ap_wifis a ";
+        $sql = "select a.* from install_ap_wifis a ";
         $sql.= "left outer join install_sites b on b.id=a.install_site_id ";
         $sql.= "where b.id = " . $install_site_id . "";
         $ci = & get_instance();
@@ -193,7 +193,7 @@ class Pinstall_request extends CI_Model{
         return array('res'=>$que->result(),'count'=>$que->num_rows());
     }
     function getswitches($install_site_id){
-        $sql = "select * from install_switches a ";
+        $sql = "select a.* from install_switches a ";
         $sql.= "left outer join install_sites b on b.id=a.install_site_id ";
         $sql.= "where b.id = " . $install_site_id . " ";
         $ci = & get_instance();
@@ -257,5 +257,27 @@ class Pinstall_request extends CI_Model{
           }
         }
         return $files;
+    }
+    function saveinstalldeviceinfo($params){
+        $sql = 'insert into installdeviceinfo ';
+        $sql.= '(install_request_id,name,tipe,status,token) ';
+        $sql.= 'values ';
+        $sql.= '('.$params['install_request_id'].',"'.$params['name'].'","'.$params['tipe'].'","'.$params['status'].'","'.$params['token'].'")';
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        return array(
+            'sql'=>$sql,
+            'id'=>$ci->db->insert_id()
+        );
+    }
+    function updatetipedevice($params){
+        $sql = 'update installdeviceinfo ';
+        $sql.= 'set install_request_id = ' . $params['install_request_id'] . ' ';
+        $sql.= 'where token = ' . $params['token'] . ' ';
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        return array(
+            'sql'=>$sql,
+        );
     }
 }

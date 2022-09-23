@@ -96,7 +96,7 @@
 								<div class="span8"><input type="text" id="reporter" name="reporter" class="inp_ticket2" /></div>
 							</div>
 							<div class="row-form clearfix">
-								<div class="span4">Telp</div>
+								<div class="span4" title="test 123">Telpx</div>
 								<div class="span8"><input type="text" id="reporterphone" name="reporterphone" class="inp_ticket2" /></div>
 							</div>
 						</div>

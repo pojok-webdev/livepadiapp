@@ -17,7 +17,7 @@ console.log("TS Survey");
 	});
 	var nNodes = dtSurvey.fnGetNodes();
 	$(this).fieldUpdater({
-		url:thisdomain+"surveys/feedData",
+		url:"/surveys/feedData",
 		cellClass:'updatable',
 		fieldName:'fieldName',
 		idAttr:'myid',
@@ -35,7 +35,15 @@ console.log("TS Survey");
 					$.each(b,function(x,y){
 						console.log(x+' and '+y+' or '+b[x] );
 					});
-					newRow = dtSurvey.fnAddData([b["name"],b["createuser"],b["create_date"],b["address"],'','',b["surveydirection"],'',b['surveyresult'],'<button class="btn btn_edit" type="button">Edit</button>']);
+				//	newRow = dtSurvey.fnAddData([b["name"],b["createuser"],b["create_date"],b["address"],'','',b["surveydirection"],'',b['surveyresult'],'<button class="btn btn_edit" type="button">Edit</button>']);
+
+					newid = 1*maxid+1
+					console.log('newid',newid)
+					newRow = dtSurvey.fnAddData([b["name"],b["createuser"],b["create_date"],b["address"],'','',b["surveydirection"],'',b['surveyresult'],'<div class="btn-group"><button data-toggle="dropdown" class="btn dropdown-toggle">Action <span class="caret"></span></button><ul class="dropdown-menu pull-right"><li class="btn_edit pointer" ><a href="/surveys/edit/'+newid+'">Edit</a></li><li class="divider"></li><li class="btn_reportx pointer"><a href="/surveys/showreport/'+newid+'">Report</a></li></ul></div>']);
+
+
+
+
 					var row = dtSurvey.fnGetNodes(newRow);
 					$(row).attr('myid', maxid+1);
 					var nTr = dtSurvey.fnSettings().aoData[newRow[0]].nTr;
@@ -53,7 +61,7 @@ console.log("TS Survey");
 		});
 	},2000);
 	$('#permintaansurvey').click(function(){
-		window.location.href = thisdomain+'preclients/lookup';
+		window.location.href = '/preclients/lookup';
 	});
 	$(nNodes).find(".tohuman").sql2idformat();
 	$(nNodes).find(".tohumandate").formatiddate();
@@ -64,10 +72,10 @@ console.log("TS Survey");
 	});
 	$("#tSurveys").on("click","tbody tr .btn_edit",function(){
 		//window.location.href = thisdomain+'surveys/edit/'+$(this).attr('survey_id');
-		window.location.href = thisdomain+'surveys/edit/'+$(this).stairUp({level:4}).attr('myid');
+		window.location.href = '/surveys/edit/'+$(this).stairUp({level:4}).attr('myid');
 	});
 	$("#tSurveys").on("click","tbody tr .btn_report",function(){
-		window.location.href = thisdomain+"surveys/showreport/"+$(this).stairUp({level:4}).attr("myid");
+		window.location.href = "/surveys/showreport/"+$(this).stairUp({level:4}).attr("myid");
 		//window.open('http://database.padinet.com:4000/survey/'+$(this).stairUp({level: 4}).attr("myid"));
 	});
 });

@@ -37,7 +37,7 @@ $('#clientLookup').on('click','tbody tr',function(){
 	//$('#dClientLookup').modal('hide');
 	showDChildPic({
 		clientname:that.find('.cName').html(),
-		childsite:that.find('.cName').html(),
+		childsite:that.find('.cName').html()+' ('+that.find('.cAlias').html()+')',
 		childsiteaddress:that.find('.cAddress').html(),
 		childpic:'',
 		childpicphone:'',
@@ -65,7 +65,7 @@ $('#selectedClient').on('click','tbody tr td.removeClient',function(){
 });
 var suggests = {xl:"xl",is:"indosat",ip:"Iconplus",ni:"napinfo",la:"lintasarta",th:"tellon"};
 $.ajax({
-	url:thisdomain+"datacenters/get",
+	url:"/datacenters/get",
 	dataType:"json"
 }).done(function(datacenter){
 	$.each(datacenter,function(x,y){
@@ -78,7 +78,7 @@ $('#upstreamtype').change(function(){
 			$("#dudescription").show();
 			console.log("BACKBONE SELECTED");
 			$.ajax({
-				url:thisdomain+"backbones/get",
+				url:"/backbones/get",
 				dataType:"json"
 			}).done(function(backbone){
 				$('#upstream').autocomp({
@@ -90,7 +90,7 @@ $('#upstreamtype').change(function(){
 			$("#dudescription").hide();
 			console.log("BTS SELECTED");
 			$.ajax({
-				url:thisdomain+"pbtses/get",
+				url:"/pbtses/get",
 				dataType:"json"
 			}).done(function(bts){
 				$('#upstream').autocomp({
@@ -102,7 +102,7 @@ $('#upstreamtype').change(function(){
 			$("#dudescription").hide();
 			console.log("DATACENTER SELECTED");
 			$.ajax({
-				url:thisdomain+"datacenters/get",
+				url:"/datacenters/get",
 				dataType:"json"
 			}).done(function(datacenter){
 				$('#upstream').autocomp({
@@ -114,7 +114,7 @@ $('#upstreamtype').change(function(){
 			$("#dudescription").hide();
 			console.log("PTP SELECTED");
 			$.ajax({
-				url:thisdomain+"ptps/gets",
+				url:"/ptps/gets",
 				dataType:"json"
 			}).done(function(ptp){
 				$('#upstream').autocomp({
@@ -126,7 +126,7 @@ $('#upstreamtype').change(function(){
 			$("#dudescription").show();
 			console.log("CORE SELECTED");
 			$.ajax({
-				url:thisdomain+"cores/gets",
+				url:"/cores/gets",
 				dataType:"json"
 			}).done(function(core){
 				$('#upstream').autocomp({
@@ -254,6 +254,7 @@ $('#btnsaveupstream').click(function(){
 				reporter:$("#ureporter").val(),
 				//ticketstart:$("#ticketstart").formatDate({inputFormat:"dd/MM/YYYY",outputFormat:"YYYY-MM-dd"}),
 				reporterphone:$("#ureporterphone").val(),
+				createuser:$('#createuser').val()
 			};
 			switch($("#upstreamtype :selected").text().toLowerCase()){
 				case "backbone":
@@ -288,12 +289,25 @@ $('#btnsaveupstream').click(function(){
 				if(validate.result){
 					console.log('Validate description',validate.message);
 					$.ajax({
-						url:thisdomain+'tickets/saves',
+						url:'/tickets/saves',
 						data:dataproperty,
 						type:'post'
 					})
 					.done(function(res){
 						console.log("RESULT",res);
+						$.ajax({
+							url: '/tickets/get_obj_by_id/' + res,
+							type: 'get',
+							async: false,
+							dataType: 'json',
+						})
+						.done(newticket=>{
+							sendDiscord(newticket,'puji')
+							sendDiscord(newticket,'padi')
+							})
+						.fail(err=>{
+							console.log("Err ticketupstream",err)
+						})
 						var immediateFU = false;
 								/*start test followup ticket*/
 								switch($("#upstreamtype :selected").text().toLowerCase()){
@@ -308,7 +322,7 @@ $('#btnsaveupstream').click(function(){
 									break;
 								}
 								if(immediateFU){
-									$.post(thisdomain + 'ticket_followups/add', {
+									$.post('/ticket_followups/add', {
 										ticket_id: res,
 										result: '0',
 										followUpDate: $(this).currentTime({format:"YYYY-MM-dd HH:mm:ss"}),//getdate('sql','00:00:00'),
@@ -334,7 +348,7 @@ $('#btnsaveupstream').click(function(){
 							console.log("CLIENTID",that.attr("trid"));
 							console.log("that.find(.spic).html()",that.find(".spic").html())
 							$.ajax({
-								url:thisdomain+'tickets/saves',
+								url:'/tickets/saves',
 								data:{
 									"clientname":that.find(".sname").html()+"("+$("#upstreamtype :selected").text()+"-"+$("#upstream").val()+")",
 									"client_id":that.attr("trid"),
@@ -348,7 +362,7 @@ $('#btnsaveupstream').click(function(){
 								type:'post'
 							})
 							.done(function(resu){
-								console.log("RESU",resu);
+								console.log("RESU",resu);								
 								//updateRecordRow();
 							})
 							.fail(function(err){
@@ -402,7 +416,7 @@ $('#btnupdateupstream_').click(function(){
 		console.log("CLIENTID",that.attr("trid"));
 		console.log("siteID",that.attr("siteid"));
 		$.ajax({
-			url:thisdomain+'tickets/saves',
+			url:'/tickets/saves',
 			data:{
 				"clientname":that.find(".sname").html()+"("+$("#upstreamtype :selected").text()+"-"+$("#upstream").val()+")",
 				"client_id":that.attr("trid"),

@@ -68,6 +68,12 @@
 						</td>
 					</tr>
 					<tr>
+					<td class="rowname">Kode Ticket</td>
+					<td>
+						<?php echo $ticket->kdticket;?>
+					</td>
+					</tr>
+					<tr>
 						<td class="rowname">
 							Kategori
 						</td>

@@ -506,8 +506,8 @@
 			sjasa+= '<option value="troubleshooting">Troubleshooting</option>';
 			sjasa+= '<option value="maintenance dan manage service">Maintenance dan Manage Service</option>';
 
-			ssoho = '<option value="1">1:2</option>';
-			ssoho+= '<option value="2">1:4</option>';
+			ssoho = '<option value="1:2">1:2</option>';
+			ssoho+= '<option value="1:4">1:4</option>';
 
 			sdomestic = '<option id="iix" value="iix">IIX</option>';
 			sdomestic+= '<option id="localloop" value="localloop">Local Loop</option>';

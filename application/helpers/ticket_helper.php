@@ -17,7 +17,7 @@ function getstatistics(){
 }
 function ticket_populate2($custombranch=null){
 	$limit = 1000;
-	$beginquerydate = '2021-10-1';
+	$beginquerydate = '2022-01-1';
 	if($custombranch===null){
 		$userbranches = implode(",",getuserbranches());
 	}else{

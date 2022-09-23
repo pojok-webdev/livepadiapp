@@ -1819,7 +1819,7 @@ class Pticket extends CI_Model{
         return array('res'=>$que->result(),'cnt'=>$que->num_rows());
     }
     function get_obj_by_id($id){
-        $sql = 'select id,kdticket,clientname,complaint,reporter,reporterphone,solution,description,ticketstart,ticketend,';
+        $sql = 'select id,kdticket,clientname,complaint,reporter,reporterphone,solution,description,ticketstart,ticketend,createuser,';
         $sql.= 'downtimestart,downtimeend,cause,cause_id,"yes" is_ok,duration from tickets ';
         $sql.= 'where id=' . $id . ' ';
         $ci = & get_instance();

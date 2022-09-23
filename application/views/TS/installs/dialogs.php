@@ -134,70 +134,81 @@
 	</div>
 	<div class="modal-body">
 	<div class="row-fluid">
-	<div class="span6">
-	<div class="block-fluid without-head">
-	<div class="row-form clearfix">
-	<div class="span3">Pemilik</div>
-		<div class="span9">
-			<?php echo form_dropdown("milikpadinet",array("1"=>"PadiNET","0"=>"Pelanggan"),0,'id="pemilik_router" class="inp_router" type="selectid"');?>
+		<div class="span6">
+			<div class="block-fluid without-head">
+				<?php if(1==3){?>
+				<div class="row-form clearfix">
+					<div class="span3">Pemilik</div>
+					<div class="span9">
+						<?php echo form_dropdown("milikpadinet",array("1"=>"PadiNET","0"=>"Pelanggan"),0,'id="pemilik_router" class="inp_router" type="selectid"');?>
+					</div>
+				</div>
+				<?php }?>
+				<div class="row-form clearfix">
+					<div class="span3">Kepemilikan</div>
+					<div class="span9"><select name="milikpadinet" id="milikpadinet" type="selectid" class="inp_router">
+						<option value="1">Sewa (milik PadiNET)</option>
+						<option value="2">Dipinjamkan</option>
+						<option value="3">Milik Pelanggan (Beli ke PadiNET)</option>
+						<option value="4">Milik Pelanggan (Beli sendiri)</option>
+					</select></div>
+				</div>
+				<div class="row-form clearfix" id="router_pelanggan">
+					<div class="span3">Tipe</div>
+					<div class="span9">
+						<?php echo form_input("tipe","",'id="tipe_router_pelanggan"');?>
+					</div>
+				</div>
+				<div class="row-form clearfix" id="router_padinet">
+					<div class="span3">Tipe</div>
+					<div class="span9">
+						<?php echo form_dropdown("tipe",$routersboards,0,'id="tipe_router" type="select" class="inp_router"');?>
+					</div>
+				</div>
+				<div class="row-form clearfix">
+					<div class="span3">MacBoard</div>
+					<div class="span9"><input type="text" name="macboard" id="macboard_router" value="" class="inp_router"/></div>
+				</div>
+				<div class="row-form clearfix">
+					<div class="span3">IP Public</div>
+					<div class="span9"><input type="text" name="ip_public" id="ip_public_router" value="" class="inp_router"/></div>
+				</div>
+				<div class="row-form clearfix">
+					<div class="span3">IP Private</div>
+					<div class="span9"><input type="text" name="ip_private" id="ip_private_router" value="" class="inp_router"/></div>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="row-form clearfix" id="router_pelanggan">
-	<div class="span3">Tipe</div>
-		<div class="span9">
-			<?php echo form_input("tipe","",'id="tipe_router_pelanggan"');?>
+		<div class="span6">
+			<div class="block-fluid without-head">
+				<div class="row-form clearfix">
+					<div class="span3">User</div>
+					<div class="span9"><input type="text" name="user" id="user_router" value="" class="inp_router"/></div>
+				</div>
+				<div class="row-form clearfix">
+					<div class="span3">Password</div>
+					<div class="span9"><input type="text" name="password" id="password_router" value="" class="inp_router"/></div>
+				</div>
+				<div class="row-form clearfix">
+					<div class="span3">Location</div>
+					<div class="span9"><input type="text" name="location" id="location_router" value="" class="inp_router"/></div>
+				</div>
+				<div class="row-form clearfix">
+					<div class="span3">Serial No</div>
+					<div class="span9"><input type="text" name="serialno" id="serialno_router" value="" class="inp_router"/></div>
+				</div>
+				<div class="row-form clearfix">
+					<div class="span3">Barcode</div>
+					<div class="span9"><input type="text" name="barcode" id="barcode_router" value="" class="inp_router"/></div>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="row-form clearfix" id="router_padinet">
-	<div class="span3">Tipe</div>
-		<div class="span9">
-			<?php echo form_dropdown("tipe",$routersboards,0,'id="tipe_router" type="select"');?>
 		</div>
-	</div>
-	<div class="row-form clearfix">
-	<div class="span3">MacBoard</div>
-	<div class="span9"><input type="text" name="macboard" id="macboard_router" value="" class="inp_router"/></div>
-	</div>
-	<div class="row-form clearfix">
-	<div class="span3">IP Public</div>
-	<div class="span9"><input type="text" name="ip_public" id="ip_public_router" value="" class="inp_router"/></div>
-	</div>
-	<div class="row-form clearfix">
-	<div class="span3">IP Private</div>
-	<div class="span9"><input type="text" name="ip_private" id="ip_private_router" value="" class="inp_router"/></div>
-	</div>
-	</div>
-	</div>
-	<div class="span6">
-	<div class="block-fluid without-head">
-	<div class="row-form clearfix">
-	<div class="span3">User</div>
-	<div class="span9"><input type="text" name="user" id="user_router" value="" class="inp_router"/></div>
-	</div>
-	<div class="row-form clearfix">
-	<div class="span3">Password</div>
-	<div class="span9"><input type="text" name="password" id="password_router" value="" class="inp_router"/></div>
-	</div>
-	<div class="row-form clearfix">
-	<div class="span3">Location</div>
-	<div class="span9"><input type="text" name="location" id="location_router" value="" class="inp_router"/></div>
-	</div>
-	<div class="row-form clearfix">
-	<div class="span3">Serial No</div>
-	<div class="span9"><input type="text" name="serialno" id="serialno_router" value="" class="inp_router"/></div>
-	</div>
-	<div class="row-form clearfix">
-	<div class="span3">Barcode</div>
-	<div class="span9"><input type="text" name="barcode" id="barcode_router" value="" class="inp_router"/></div>
-	</div>
-	<div class="footer">
-	<button class="btn closemodal saverouter" type="button" id='saverouter'>Simpan</button>
-	<button class="btn closemodal updaterouter" type="button" id='updaterouter'>Update</button>
-	<button class="btn closemodal" type="button">Tutup</button>
-	</div>
-	</div>
-	</div>
-	</div>
+		<div class="footer">
+			<button class="btn closemodal saverouter" type="button" id='saverouter'>Simpan</button>
+			<button class="btn closemodal updaterouter" type="button" id='updaterouter'>Update</button>
+			<button class="btn closemodal" type="button">Tutup</button>
+		</div>
 	</div>
 </div>
 <div id="dAddOfficer" class="modal hidex fade" role="dialog" aria-labelledby="myModalLabel">
@@ -274,17 +285,33 @@
 	<div class="span9"><input type="text" name="password_apwifi" id="password_apwifi" value=""/></div>
 	</div>
 	<div class="row-form clearfix">
-	<div class="span3">Location</div>
-	<div class="span9"><input type="text" name="location_apwifi" id="location_apwifi" value=""/></div>
+		<div class="span3">Location</div>
+		<div class="span9"><input type="text" name="location_apwifi" id="location_apwifi" value=""/></div>
 	</div>
+	<div class="row-form clearfix">
+		<div class="span3">Kepemilikan</div>
+		<div class="span9">
+			<select name="ownership" id="ownership_apwifi">
+				<option value="1">Sewa (milik PadiNET)</option>
+				<option value="2">Dipinjamkan</option>
+				<option value="3">Milik Pelanggan (Beli ke PadiNET)</option>
+				<option value="4">Milik Pelanggan (Beli sendiri)</option>
+
+			</select>
+		</div>
+	</div>
+	
+	</div>
+	</div>
+	</div>
+
 	<div class="footer">
 	<button class="btn closemodal savewifi" type="button" id='savewifi'>Simpan</button>
 	<button class="btn closemodal updatewifi" type="button" id='btnsavewifi'>Update</button>
 	<button class="btn closemodal" type="button">Tutup</button>
 	</div>
-	</div>
-	</div>
-	</div>
+
+
 	</div>
 </div>
 <div id="dAddInstallImage" class="modal hidex fade" role="dialog" aria-labelledby="myModalLabel">
@@ -535,16 +562,28 @@
 	<div class="span6"><input type="text" name="user" id="switchuser" value=""/></div>
 	</div>
 	<div class="row-form clearfix switch_password">
-	<div class="span6">Password</div>
-	<div class="span6"><input type="text" name="password" id="switchpassword" value=""/></div>
+		<div class="span6">Password</div>
+		<div class="span6"><input type="text" name="password" id="switchpassword" value=""/></div>
 	</div>
+	<div class="row-form clearfix">
+		<div class="span6">Kepemilikan</div>
+			<div class="span6">
+				<select name="ownership" id="switchownership" class="inp_switch" type="selectid">
+					<option value="1">Sewa (milik PadiNET)</option>
+					<option value="2">Dipinjamkan</option>
+					<option value="3">Milik Pelanggan (Beli ke PadiNET)</option>
+					<option value="4">Milik Pelanggan (Beli sendiri)</option>
+				</select>
+			</div>
+		</div>
+
 	</div>
 	</div>
 	</div>
 	<div class="footer">
-	<button class="btn closemodal saveswitch" type="button" id='saveswitch'>Simpan</button>
-	<button class="btn closemodal updateswitch" type="button" id='updateswitch'>Update</button>
-	<button class="btn closemodal" type="button">Tutup</button>
+		<button class="btn closemodal saveswitch" type="button" id='saveswitch'>Simpan</button>
+		<button class="btn closemodal updateswitch" type="button" id='updateswitch'>Update</button>
+		<button class="btn closemodal" type="button">Tutup</button>
 	</div>
 	</div>
 </div>

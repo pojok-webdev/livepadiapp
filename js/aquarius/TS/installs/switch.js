@@ -26,39 +26,30 @@
 		$("#dSwitch").modal("show");
 	});
 	$(".edit_switch").click(function(){
-		selected = $(this).stairUp({level:1});
-		id = selected.attr('myid');
+		selected = $(this).stairUp({level:4});
+		id = selected.attr('thisid');
 		$("#switch tbody tr").removeClass("selected");
 		selected.addClass("selected");
 		$(".saveswitch").hide();
 		$(".updateswitch").show();
 		$(".updateswitch").attr("id",id);
-		$.getJSON(thisdomain+'install_switchs/getjsonswitch/'+id,function(data){
-			$("#pemilik_switch").val(data['milikpadinet']);
-			switch($("#pemilik_switch").val()){
-				case "0"://Pelanggan
-					$("#switch_pelanggan").show();
-					$("#switch_padinet").hide();
-				break;
-				case "1"://Padinet
-					$("#switch_pelanggan").hide();
-					$("#switch_padinet").show();
-				break;
-			}
-			$.each($("#tipe_switch option"),function(x,y){
-				if(data['tipe']==$(this).text()){
-					$(this).attr("selected","selected");
-				}
-			})
-			$("#tipe_switch_pelanggan").val(data['tipe']);
-			$("#macboard_switch").val(data['macboard']);
-			$("#ip_public_switch").val(data['ip_public']);
-			$("#ip_private_switch").val(data['ip_private']);
-			$("#user_switch").val(data['user']);
-			$("password_switch").val(data['password']);
-			$("location_switch").val(data['location']);
-		});
-		$("#dAddswitch").modal();
+		console.log('ID',id)
+		$.ajax({
+			url:'/install_switches/getjsonswitch/'+id,
+			dataType:'json'
+		})
+		.done(res=>{
+			console.log("RES",res)
+			data = res.res[0]
+			$("#switchname").setCombo({selected:data.name,comparator:'label'});
+			$("#switchport").setCombo({selected:data.port});
+			$("#ismanaged").setCombo({selected:data.ismanaged});
+			$("#switchownership").setCombo({selected:data.ownership})
+			$("#dSwitch").modal();
+		})
+		.fail(err=>{
+			console.log("Err",err)
+		})
 	});
 	$("#tSwitch").on("click",".remove_switch",function(){
 		var selected = $(this).stairUp({level:3});
@@ -73,7 +64,7 @@
 	$(".saveswitch").click(function(){
 		$(".inp_switch").makekeyvalparam();
 		$.ajax({
-			url:thisdomain+"install_switches/save",
+			url:"/install_switches/save",
 			data:JSON.parse('{'+$(".inp_switch").attr("keyval")+'}'),
 			type:"post"
 		}).done(function(data){
@@ -94,9 +85,29 @@
 	$(".updateswitch").click(function(){
 		$(".inp_switch").makekeyvalparam();
 		console.log($(".inp_switch").attr("keyval"));
-		var myid = $("#switch tbody tr.selected").attr("myid");
+		var myid = $("#tSwitch tbody tr.selected").attr("thisid");
 		console.log("myid : "+myid);
-		$.post(thisdomain+'install_switchs/update/',{id:myid,tipe:$("#tipe_switch :selected").text(),macboard:$("#macboard_switch").val(),ip_public:$("#ip_public_switch").val(),ip_private:$("#ip_private_switch").val(),user:$("#user_switch").val(),password:$("#password_switch").val(),location:$("#location_switch").val()}).done(function(data){
+		$.ajax({
+			url:'/install_switches/update',
+			type:'post',
+			dataType:'json',
+			data:{
+				id:myid,
+				name:$("#switchname").val(),
+				ismanaged:$("#ismanaged").val(),
+				port:$("#switchport").val(),
+				user:$("#switchuser").val(),
+				password:$("#switchpassword").val(),
+				ownership:$("#switchownership").val()
+			}
+		})
+		.done(res=>{
+			console.log('Update switch success',res)
+		})
+		.fail(err=>{
+			console.log('Update switch failed',err)
+		})
+		/*$.post(thisdomain+'install_switches/update/',{id:myid,tipe:$("#tipe_switch :selected").text(),macboard:$("#macboard_switch").val(),ip_public:$("#ip_public_switch").val(),ip_private:$("#ip_private_switch").val(),user:$("#user_switch").val(),password:$("#password_switch").val(),location:$("#location_switch").val()}).done(function(data){
 		}).fail(function(){
 			alert("Tidak dapat mengupdate switch, hubungi Developer");
 		}).done(function(){
@@ -108,7 +119,7 @@
 			}
 			$("#switch tbody tr.selected").find("switch_type").html(tipeswitch);
 			$("#switch tbody tr.selected").find("info").html("tipe_switch_pelanggan");
-		});
+		});*/
 	});
 	$("#ismanaged").change(function(){
 		switch($(this).val()){

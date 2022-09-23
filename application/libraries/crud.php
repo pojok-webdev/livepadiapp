@@ -31,4 +31,19 @@ Class Crud {
             'cnt'=>$que->num_rows(),'res'=>$que->result()
         );
     }
+    function update($tableName,$columns,$conditions){
+        $arrcolumns = array();$arrconditions = array();
+        foreach($columns as $key=>$val){
+            array_push($arrcolumns,$key . '=' . $val . ' ');
+        }
+        foreach($conditions as $key=>$val){
+            array_push($arrconditions,$key . '=' . $val . ' ');
+        }
+        $sql = 'update ' . $tableName . ' ';
+        $sql.= 'set ' . implode(" , ",$arrcolumns) . ' ';
+        $sql.= 'where ' . implode(' and ', $arrconditions);
+        $ci = & get_instance();
+        $que = $ci->db->query($sql);
+        return array('sql'=>$sql);
+    }
 }

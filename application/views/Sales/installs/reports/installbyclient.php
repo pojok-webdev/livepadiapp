@@ -314,9 +314,9 @@
 					<div class="col-md-12">
 					<?php if($ba->imgondisk==="1"){?>
 						<img class="img-responsive padbot10" src="/images/installs/<?php echo $ba->path;?>"  width=1600 height=1200 />
-			<?php }else{?>
-				<img class="img-responsive padbot10" src="/images/installs/<?php echo $ba->img;?>"  width=1600 height=1200 />
-			<?php }?>
+					<?php }else{?>
+						<img class="img-responsive padbot10" src="/images/installs/<?php echo $ba->img;?>"  width=1600 height=1200 />
+					<?php }?>
 					</div>
 				</div>
 				<span class="row-footer"><?php echo $ba->description;?></span>

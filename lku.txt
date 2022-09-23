@@ -1,0 +1,200 @@
+| 73 |
+| 74 |
+| 75 |
+| 76 |
+| 77 |
+| 78 |
+
+select a.id, a.kdticket,a.parentid,b.id from tickets a left outer join ticketcauses b on b.id=a.cause_id left outer join ticketcausecategories c on c.id=b.category_id  where c.id=12;
+
+
+select a.id, a.kdticket,a.parentid,b.id from tickets a left outer join ticketcauses b on b.id=a.cause_id left outer join ticketcausecategories c on c.id=b.category_id  where c.id=12 and parentid is not null;
+
+select a.id, a.kdticket,a.parentid,b.id from tickets a left outer join ticketcauses b on b.id=a.cause_id left outer join ticketcausecategories c on c.id=b.category_id where c.id=12 and parentid is not null and date(a.create_date)>="2021-4-08" and date(a.create_date)<="2022-4-20";
+select a.id, a.kdticket,a.parentid,b.id from tickets a left outer join ticketcauses b on b.id=a.cause_id left outer join ticketcausecategories c on c.id=b.category_id where c.id=12 and parentid is not null and date(a.create_date)>="2021-4-08" and date(a.create_date)<="2022-4-20"
+
+
+select a.id, a.kdticket,a.parentid,b.id 
+from tickets a 
+left outer join ticketcauses b on b.id=a.cause_id 
+left outer join ticketcausecategories c on c.id=b.category_id 
+where c.id=12 and parentid is not null 
+and date(a.create_date)>="2021-06-01" 
+and date(a.create_date)<="2021-06-30" ;
+
+
+select a.id, a.kdticket,a.parentid,b.id 
+from tickets a 
+left outer join ticketcauses b on b.id=a.cause_id 
+left outer join ticketcausecategories c on c.id=b.category_id 
+where date(a.create_date)>="2021-06-01" 
+and date(a.create_date)<="2021-06-30" ;
+
+
+select a.id, a.kdticket,a.parentid,b.id from tickets a left outer join ticketcauses b on b.id=a.cause_id left outer join ticketcausecategories c on c.id=b.category_id  where  c.id is null;
+
+
+	select a.id,a.kdticket,a.clientname name,b.name subrootcause,c.name mainrootcause,create_date from ticket2021 a 
+	left outer join ticketcauses b on b.id=a.cause_id 
+	left outer join ticketcausecategories c on c.id=b.category_id 
+	left outer join clients d on d.id=a.client_id 
+	where a.requesttype="pelanggan" 
+	and date(a.create_date)>="2021-06-1"
+	and date(a.create_date)<="2021-06-30" 
+	and a.parentid is null 
+	and b.id = 73
+	and b.id <> 74 
+	and d.branch_id in (1,2,3,4) 
+	order by c.name,a.create_date 
+	;
+
+select id from ticketcauses where category_id=12;
+
+pindah ke mei (6)
+update ticket2021 set create_date='2021-06-09 10:07:51' where id=27284;
+update ticket2021 set create_date='2021-06-09 10:48:03' where id=27288;
+update ticket2021 set create_date='2021-06-09 11:16:59' where id=27291;
+update ticket2021 set create_date='2021-06-16 09:46:42' where id=27470;
+
+pindah ke april (2)
+update ticket2021 set create_date='2021-04-30 15:28:39' where id=27472;
+update ticket2021 set create_date='2021-04-30 15:30:39' where id=27474;
+
+pindah ke februari (4)
+update ticket2021 set create_date='2021-02-28 15:30:39' where id=27722; (aseli 73)
+update ticket2021 set create_date='2021-02-28 15:32:39' where id=27583; (aseli 76)
+update ticket2021 set create_date='2021-02-28 15:34:39' where id=27653; (aseli 76)
+update ticket2021 set create_date='2021-02-28 15:36:39' where id=27634; (aseli AGUSTINO SUFA BUBUN)
+
+pindah ke januari (2) 
+update ticket2021 set create_date='2021-01-31 15:19:39' where id=27214;
+update ticket2021 set create_date='2021-01-31 15:22:39' where id=27282;
+
+aseli 73
++-------+-----------+----------------------------------------------------+--------------+---------------+---------------------+
+| id    | kdticket  | name                                               | subrootcause | mainrootcause | create_date         |
++-------+-----------+----------------------------------------------------+--------------+---------------+---------------------+
+mei| 27214 | 202106087 | KOPERASI KARYAWAN SAMPOERNA                        | PTP Padinet  | -BTS-         | 2021-06-05 15:19:39 |
+mei| 27282 | 202106155 | NURWULANSARI (VILLA MULJONO / BU RIRIN)            | PTP Padinet  | -BTS-         | 2021-06-09 09:42:01 |
+mei| 27284 | 202106157 | ABDULLAH (PRATAMA CELL)                            | PTP Padinet  | -BTS-         | 2021-06-09 10:07:51 |
+mei| 27288 | 202106161 | RINALDI BAYU (DIAN ABADI CELL - BOROBUDUR)         | PTP Padinet  | -BTS-         | 2021-06-09 10:48:03 |
+mei| 27291 | 202106164 | SEVEN TRONIC                                       | PTP Padinet  | -BTS-         | 2021-06-09 11:16:59 |
+mei| 27470 | 202106343 | CATUR PILAR SEJAHTERA, PT                          | PTP Padinet  | -BTS-         | 2021-06-16 09:46:42 |
+apr| 27472 | 202106345 | INDONESIA PRATAMA MULTIPAK, PT (IMCP - SITE KRIAN) | PTP Padinet  | -BTS-         | 2021-06-16 09:47:34 |
+apr| 27474 | 202106347 | ASRI MITRA JAYA, PT (ASRI MOTOR )                  | PTP Padinet  | -BTS-         | 2021-06-16 09:49:00 |
+feb| 27722 | 202106595 | LUCKY CELL, CV (Ex TAN RICHARD WESUTAN)            | PTP Padinet  | -BTS-         | 2021-06-29 08:25:37 |
+
+
+	select a.id,a.kdticket,a.clientname name,b.name subrootcause,c.name mainrootcause,create_date from ticket2021 a 
+	left outer join ticketcauses b on b.id=a.cause_id 
+	left outer join ticketcausecategories c on c.id=b.category_id 
+	left outer join clients d on d.id=a.client_id 
+	where a.requesttype="pelanggan" 
+	and date(a.create_date)>="2021-06-1"
+	and date(a.create_date)<="2021-06-30" 
+	and a.parentid is null 
+	and b.id = 76
+	and b.id <> 74 
+	and d.branch_id in (1,2,3,4) 
+	order by c.name,a.create_date 
+	;
+
+    aseli 76
++-------+-----------+--------------------------+-------------------------------------+---------------+---------------------+
+| id    | kdticket  | name                     | subrootcause                        | mainrootcause | create_date         |
++-------+-----------+--------------------------+-------------------------------------+---------------+---------------------+
+| 27583 | 202106456 | WASKITA BUMI WIRA, PT () | Router dan Switch BTS Configuration | -BTS-         | 2021-06-21 11:23:50 |
+| 27653 | 202106526 | ABDULLAH (PRATAMA CELL)  | Router dan Switch BTS Configuration | -BTS-         | 2021-06-24 19:44:22 |
++-------+-----------+--------------------------+-------------------------------------+---------------+---------------------+
+
+mysql> select id,clientname,parentid,create_date from ticket2021 where parentid=27633;
++-------+-------------------------------+----------+---------------------+
+| id    | clientname                    | parentid | create_date         |
++-------+-------------------------------+----------+---------------------+
+| 27634 | AGUSTINO SUFA BUBUN(BTS-TANK) |    27633 | 2021-06-23 16:38:22 |
++-------+-------------------------------+----------+---------------------+
+
+
+
+
+select a.id,a.clientname,a.parentid,b.clientname,a.create_date from ticket2021 a left outer join ticket2021 b on b.id=a.parentid where b.id=27128  and date(a.create_date)>="2021-06-1"  and date(a.create_date)<="2021-06-30";
++-------+---------------------------------------------------+----------+-------------------+---------------------+
+| id    | clientname                                        | parentid | clientname        | create_date         |
++-------+---------------------------------------------------+----------+-------------------+---------------------+
+| 27129 | IMELDA FLORENCY THOMASOEY(BTS-Cypher (ColorsFM))  |    27128 | Cypher (ColorsFM) | 2021-06-01 15:50:49 |
+| 27130 | MITRA AKSES GLOBALINDO, PT(BTS-Cypher (ColorsFM)) |    27128 | Cypher (ColorsFM) | 2021-06-01 15:50:49 |
+| 27131 | SARI BUMI SIDAYU, PT(BTS-Cypher (ColorsFM))       |    27128 | Cypher (ColorsFM) | 2021-06-01 15:50:49 |
+| 27132 | Cyberindo Aditama, PT(BTS-Cypher (ColorsFM))      |    27128 | Cypher (ColorsFM) | 2021-06-01 15:50:49 |
+| 27133 | HERRY GUNAWAN(BTS-Cypher (ColorsFM))              |    27128 | Cypher (ColorsFM) | 2021-06-01 15:50:49 |
+| 27134 | DATA KOMUNIKA, CV(BTS-Cypher (ColorsFM))          |    27128 | Cypher (ColorsFM) | 2021-06-01 15:50:49 |
+| 27135 | ARVIAN MULTI LANGGENG, CV(BTS-Cypher (ColorsFM))  |    27128 | Cypher (ColorsFM) | 2021-06-01 15:50:49 |
+
+
+update ticket2021 set create_date = '2021-05-31 15:50:49' where parentid=27128  and date(create_date)>="2021-06-1"  and date(create_date)<="2021-06-30";
+
+
+select a.id,a.clientname,a.parentid,b.clientname,a.create_date from ticket2021 a left outer join ticket2021 b on b.id=a.parentid where b.clientname like '%centrix%'  and date(a.create_date)>="2021-06-1"  and date(a.create_date)<="2021-06-30";
++-------+-------------------------------------------------+----------+------------+---------------------+
+| id    | clientname                                      | parentid | clientname | create_date         |
++-------+-------------------------------------------------+----------+------------+---------------------+
+| 27207 | CAHAYA BINTANG OLYMPIC, PT(BTS-Neucentrix )     |    27206 | Neucentrix | 2021-06-05 12:36:51 |
+| 27208 | LOGAM MAS INDAH, PT(BTS-Neucentrix )            |    27206 | Neucentrix | 2021-06-05 12:36:51 |
+| 27209 | JAWA TRANS INDAH TRANSPORT, PT(BTS-Neucentrix ) |    27206 | Neucentrix | 2021-06-05 12:36:51 |
+| 27210 | SURYAMAS MEGAH STEEL, PT(BTS-Neucentrix )       |    27206 | Neucentrix | 2021-06-05 12:36:51 |
+| 27255 | SURYAMAS MEGAH STEEL, PT(BTS-Neucentrix )       |    27254 | Neucentrix | 2021-06-08 10:43:48 |
+| 27256 | JAWA TRANS INDAH TRANSPORT, PT(BTS-Neucentrix ) |    27254 | Neucentrix | 2021-06-08 10:43:48 |
++-------+-------------------------------------------------+----------+------------+---------------------+
+
+update ticket2021 set create_date = '2021-05-31 15:50:49' where parentid=27206  and date(create_date)>="2021-06-1"  and date(create_date)<="2021-06-30";
+
+
+
+
+
+desember
+
+
+	select a.id,a.kdticket,a.clientname name,b.name subrootcause,c.name mainrootcause,create_date from ticket2021 a 
+	left outer join ticketcauses b on b.id=a.cause_id 
+	left outer join ticketcausecategories c on c.id=b.category_id 
+	left outer join clients d on d.id=a.client_id 
+	where a.requesttype="pelanggan" 
+	and date(a.create_date)>="2021-12-1"
+	and date(a.create_date)<="2021-12-31" 
+	and a.parentid is null 
+	and b.id = 73
+	and b.id <> 74 
+	and d.branch_id in (1,2,3,4) 
+	order by c.name,a.create_date 
+	;
+
+77
++-------+-----------+-----------------------------------------+--------------------------------+---------------+---------------------+
+| id    | kdticket  | name                                    | subrootcause                   | mainrootcause | create_date         |
++-------+-----------+-----------------------------------------+--------------------------------+---------------+---------------------+
+| 29966 | 202112146 | NURWULANSARI (VILLA MULJONO / BU RIRIN) | Router dan Switch BTS Hardware | -BTS-         | 2021-12-08 12:46:31 |
++-------
+
+78
+| id    | kdticket  | name                                                                           | subrootcause    | mainrootcause | create_date         |
++-------+-----------+--------------------------------------------------------------------------------+-----------------+---------------+---------------------+
+| 29878 | 202112058 | BUDIMANMAJU MEGAH FARMASI PT (BUMAME FARMASI, PT - SITE BENOA SQUARE DENPASAR) | Kelistrikan BTS | -BTS-         | 2021-12-04 08:02:12 |
+
+
+73
+| id    | kdticket  | name                                                 | subrootcause | mainrootcause | create_date         |
++-------+-----------+------------------------------------------------------+--------------+---------------+---------------------+
+| 29866 | 202112046 | NURWULANSARI (VILLA MULJONO / BU RIRIN)              | PTP Padinet  | -BTS-         | 2021-12-03 11:44:51 |
+| 29888 | 202112068 | NURWULANSARI (VILLA MULJONO / BU RIRIN)              | PTP Padinet  | -BTS-         | 2021-12-04 22:42:46 |
+| 30015 | 202112195 | ENVIRONMATE TECHNOLOGY INTERNATIONAL,PT (SITE GRATI) | PTP Padinet  | -BTS-         | 2021-12-11 07:19:04 |
+| 30445 | 202112625 | RAJAWALI BARA MAKMUR, PT                             | PTP Padinet  | -BTS-         | 2021-12-31 16:28:25 |
+
+
+pindah ke agustus (2)
+
+update ticket2021 set create_date='2021-08-31 15:22:39' where id=29866;
+update ticket2021 set create_date='2021-08-31 15:22:39' where id=29888;
+
+pindah ke nopember (2)
+update ticket2021 set create_date='2021-11-30 15:22:39' where id=30015;
+update ticket2021 set create_date='2021-11-30 15:22:39' where id=30445;

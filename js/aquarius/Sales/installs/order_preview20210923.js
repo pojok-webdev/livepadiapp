@@ -1,4 +1,5 @@
 (function($){
+	token = Date.now()
 	$(".btnAddVas_").click(function(){
 		$("#btnvasupdate").hide();
 		$("#btnvassave").show();
@@ -119,7 +120,18 @@
 			})
 			.done(function(res){
 				console.log("Sukses Update Client",res);
-				window.location.href = '/install_requests/index/all';
+				$.ajax({
+					url:'/install_requests/updatetipedevice',
+					data:{install_request_id:install_request_id,token:token},
+					type:'post'
+				})
+				.done(res=>{
+					console.log("Res",res)
+					window.location.href = '/install_requests/index/all';
+				})
+				.fail(err=>{console.log("Err",err)})
+
+				//window.location.href = '/install_requests/index/all';
 			})
 			.fail(function(err){
 				console.log("Error Update Client",err);
@@ -185,7 +197,6 @@
 						.fail(function(err){
 							console.log("Err",err);
 						});
-						
 				}).fail(function(){
 					alert('Tidak dapat menyimpan site requests, silakan hubungi Developer');
 				});

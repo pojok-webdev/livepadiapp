@@ -286,7 +286,7 @@
 		<script type='text/javascript' src='/js/aquarius/TS/tickets/ticketsmailtemplate.js'></script>
 		<script type='text/javascript' src='/js/aquarius/TS/tickets/fu.js'></script>
 		<script type='text/javascript' src='/js/aquarius/TS/tickets/tickets20210712.js'></script>
-		<script type='text/javascript' src='/js/aquarius/TS/tickets/upstream.js'></script>
+		<script type='text/javascript' src='/js/aquarius/TS/tickets/upstream.js?v=1'></script>
 		<script type='text/javascript' src='/js/aquarius/TS/tickets/server.js'></script>
 	</body>
 </html>

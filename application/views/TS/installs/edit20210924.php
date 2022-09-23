@@ -3,6 +3,7 @@
 <?php $this->load->view('adm/head')?>
 <script type='text/javascript' src='/js/aquarius/TS/installs/edit.js'></script>
 <script src="/js/aquarius/TS/installs/install.padilibs.js"></script>
+<script src="/js/padilibs/padi.common.js"></script>
 <body>
     <script>client_id=<?php echo $client_id;?></script>
     <?php $this->load->view("TS/installs/add/addinternet");?>
@@ -666,7 +667,7 @@
                         <table cellpadding="0" cellspacing="0" width="100%" class="table images" id="tSwitch">
                             <thead>
                                 <tr>
-                                    <th width="60">Tipe</th>
+                                    <th width="50">Tipe</th>
                                     <th width="40">Keterangan</th>
                                     <th width="10"><span class="icon-th-large"></span></th>
                                 </tr>
@@ -683,7 +684,16 @@
 										<?php }?>
                                     </td>
                                     <td>
-										<a><span class="icon-trash pointer remove_switch" ></span></a>
+                                        <div class="btn-group">
+											<button data-toggle="dropdown" class="btn btn-small dropdown-toggle"  > Aksi <span class="caret"></span></button>
+											<ul class="dropdown-menu pull-right">
+												<li class="edit_switch"><a>Edit</a></li>
+												<li class="divider"></li>
+												<li class="remove_switch"><a>Hapus</a></li>
+											</ul>
+										</div>
+
+										<!--<a><span class="icon-trash pointer remove_switch" ></span></a>-->
 									</td>
                                 </tr>
                                 <?php }?>

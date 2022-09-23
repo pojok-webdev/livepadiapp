@@ -1,0 +1,5 @@
+2022-04-18
+request Ardi, menampilkan info perangkat
+drop table installdeviceinfo;
+create table installdeviceinfo (install_request_id int,name varchar(100),tipe varchar(100),status varchar(1) comment '1:sewa,2:pinjam,3:beli ke padinet,4:beli ke pihak lain',createdate timestamp default current_timestamp(),token varchar(200));
+tipedevices

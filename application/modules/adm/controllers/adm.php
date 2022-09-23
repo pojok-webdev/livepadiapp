@@ -465,7 +465,7 @@ function chooseRole(){
 			if($this->session->userdata("pending_url")){
 				redirect($this->session->userdata("pending_url"));
 			}else{
-				redirect("/accounting");
+				redirect("/accounting/devices");
 			}
 		break;
 		}

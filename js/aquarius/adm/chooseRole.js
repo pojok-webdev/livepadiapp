@@ -25,7 +25,7 @@
 					window.location.href = thisdomain+"adm/devicetypes";
 					break;
 					case "Accounting":
-					window.location.href = thisdomain+"disconnections";
+					window.location.href = thisdomain+"accounting/devices";
 					break;
 					case "EOS":
 					window.location.href = thisdomain+"pmaintenances";
